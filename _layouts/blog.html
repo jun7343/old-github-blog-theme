@@ -1,0 +1,18 @@
+---
+layout: page
+---
+<select id="blog-select">
+  {%- assign postTotalCount = 0 -%}
+  {%- for category in site.categories -%}
+    {%- assign postTotalCount = category[1].size | plus: postTotalCount -%}
+  {%- endfor -%}
+  <option value="{{ site.url }}/blog/" {%- if page.dir == "/blog/" -%}selected{%- endif -%}>All ({{ postTotalCount }})</option>
+  {%- for html in site.html_pages -%}
+    {%- if html.taxonomy -%}
+    <option value="{{ site.url }}/blog/{{ html.taxonomy }}" {%- if page.taxonomy -%}{%- if page.taxonomy == html.taxonomy -%}selected{%- endif -%}{%- endif -%} >{{ html.taxonomy }} ({{ site.categories[html.taxonomy].size | default: 0 }})</option>
+    {%- endif -%}
+  {%- endfor -%}
+</select>
+{{ content }}
+<div id="entries-list" class="entries-{{ page.entries_layout | default: 'list' }}" data-taxonomy="{%- if page.taxonomy -%}{{ page.taxonomy }}{%- else -%}all{%- endif -%}" ></div>
+<div id="entries-pagination"></div>

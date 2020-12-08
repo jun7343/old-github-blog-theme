@@ -1,0 +1,53 @@
+---
+layout: default
+---
+
+{% include page-intro.html %}
+<style>
+  .logo-square {
+  height: 5em;
+  width: 5em;
+  border-radius: 0.5em;
+  margin: 0.5em 0.5em 0.5em 0.5em;
+ }
+
+ .author-ul {
+  list-style:none;
+  padding-left:0px;
+  line-height: 2em;
+ }
+
+</style>
+
+<main id="main" class="page-content" aria-label="Content">
+  <div class="inner">
+    <div class="entry-wrap">
+      <div class="entry-content">
+        {{ content }}
+      </div>
+      <aside class="entry-sidebar">
+        {% include author %}
+        {% if author_picture %}
+          <img id="test" class="author-picture align-center" src="{{ author_picture }}" alt="{{ author_name }}">
+        {% endif %}
+        <div class="author-content">
+          {% if author_name %}
+            <h1>{{ author_name }}</h1>
+          {% endif %}
+          <ul class="author-ul">
+            {% if site.author.school %}
+              <li><span class="icon"><img src="/assets/images/icon/iconmonstr-school-20.svg"></span><span class="label">{{ site.author.school }}</span></li>
+            {% endif %}
+            {% if site.github_username %}
+              {% assign github_url = 'https://github.com/' | append: site.github_username %}
+              <li>{% include icon-github.html username=site.github_username label=github_url %}</li>
+            {% endif %}
+            {% if site.email %}
+            <li><span class="icon icon--email">{% include icon-email.svg %}</span><span class="label"> {{ site.email }}</span></li>
+            {% endif %}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>

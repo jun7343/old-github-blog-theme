@@ -1,0 +1,201 @@
+/* ==========================================================================
+   Page intro
+   ========================================================================== */
+
+.intro {
+  margin: 1rem 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.slideshow {
+  position: relative;
+  overflow:hidden;
+  margin-top: -3rem; /* compensate for intro top margin */
+  margin-bottom: 3rem;
+  width: 100%;
+  height: 30rem;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    @if $intro-image-color-overlay == true {
+      background-color: rgba($accent-color, 0.25);
+    };
+    content: '';
+  }
+}
+
+.slideshow_slides {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.slideshow_slides a{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.slideshow_slides a img{
+  width: 100%;
+  height: 100%;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+.slideshow_slides a p{
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  border: 0.5px solid #f1f1f1;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);                                                                 
+  font-size:2.0rem;
+  font-weight: bold;
+  color: white;
+  z-index: 2;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
+  @media screen and (min-width: 200px) {
+    width: 13rem;
+  }
+  @media screen and (min-width: 300px) {
+    width: 20rem;
+  }
+  @media screen and (min-width: 601px) {
+    width: 32rem;
+  }
+  @media screen and (min-width: 1010px) {
+    width: 35rem;
+  }
+}
+
+.slideshow_nav a {
+  width: 71px;
+  height: 71px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  background:url(/assets/images/icon/sprites.png) no-repeat;
+  text-indent:-9999em;
+}
+
+.slideshow_nav a.disabled{display: none;}
+
+.slideshow_nav a.prev {
+  background-position: 0px -20px;
+  @media screen and (max-width: 1009px) {
+    display: none;
+  }
+  @media screen and (min-width: 1010px) {
+    margin-left: -26em;
+  }
+  @media screen and (min-width: 1080px) {
+    margin-left: -33em;
+  }
+}
+
+.slideshow_nav a.next {
+  background-position: -81px -20px;
+  @media screen and (max-width: 1009px) {
+    display: none;
+  }
+  @media screen and (min-width: 1010px) {
+    margin-left: 22em;
+  }
+  @media screen and (min-width: 1080px) {
+    margin-left: 29em;
+  }
+}
+
+.indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.indicator a {
+  width: 8px;
+  height: 8px;
+  margin: 0 5px;
+  background:url(/assets/images/icon/sprites.png) no-repeat -114px -4px;
+  text-indent: -9999em; 
+}
+
+.indicator a.active {
+  background-position: -134px -4px;
+}
+
+.intro-image {
+  position: relative;
+  margin-top: -3rem; /* compensate for intro top margin */
+  margin-bottom: 3rem;
+  height: 30rem;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    @if $intro-image-color-overlay == true {
+      background-color: rgba($accent-color, 0.25);
+    };
+    content: '';
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.intro-text {
+
+  /* remove space after last child element */
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.intro-title {
+  @include fluid-type($min-vw, $max-vw, 26px, 80px);
+  margin-bottom: 1rem;
+  color: tint($text-color, 25%);
+  line-height: 1;
+}
+
+.intro-subtitle {
+  @include fluid-type($min-vw, $max-vw, 18px, 28px);
+  font-style: italic;
+}
+
+.intro-actions {
+  @include list-unstyled;
+
+  li {
+    display: inline-block;
+  }
+}
+
+.intro-more {
+
+  > p:first-child {
+    font-size: 1.125em;
+    line-height: 1.625;
+  }
+}

@@ -1,0 +1,37 @@
+---
+layout: null
+permalink: /posts.json
+---
+{ {% for category in site.categories %}
+  "{{ category[0] }}": [ 
+  {%- for post in category[1] -%}
+    {
+      "title": "{{ post.title | strip | truncate: 100 }}",
+      "url" : "{{ post.url | relative_url }}",
+      "date" : "{{ post.date }}",
+      "date_format" : "{{ post.date | date: "%B %-d, %Y" }}",
+      "read_time" : {{ post.read_time | strip }},
+      "excerpt" : "{{ post.excerpt | strip | truncate: 250 }}"
+    }
+    {%- if forloop.last == false -%}
+    ,
+    {%- endif -%}
+  {%- endfor -%}
+  ],
+  {%- endfor -%}
+  "all": [
+  {%- for post in site.posts -%}
+    {
+      "title": "{{ post.title | strip | truncate: 100 }}",
+      "url" : "{{ post.url | relative_url }}",
+      "date" : "{{ post.date }}",
+      "date_format" : "{{ post.date | date: "%B %-d, %Y" }}",
+      "read_time" : {{ post.read_time | strip }},
+      "excerpt" : "{{ post.excerpt | strip | truncate: 250 }}"
+    }
+    {%- if forloop.last == false -%}
+    ,
+    {%- endif -%}
+  {%- endfor -%}
+  ]
+}

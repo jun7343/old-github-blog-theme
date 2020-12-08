@@ -1,0 +1,63 @@
+---
+layout: null
+changefreq: weekly
+priority: 0.5
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- assign sitemap_except_paths = site.data.theme.sitemap_except_pages -%}
+{%- for h_page in site.html_pages -%}
+  {%- assign page_check = true -%}
+
+  {%- for except_path in sitemap_except_paths -%}
+    {%- if except_path == h_page.path -%} {%- assign page_check = false -%} {%- endif -%}
+  {%- endfor -%}
+
+  {%- if page_check -%}
+    <url>
+      <loc>{{ site.url }}{{ h_page.url }}</loc>
+      {%- if h_page.last_modified_at == null -%}
+        <lastmod>{{ h_page.created_date | date_to_xmlschema }}</lastmod>
+      {%- else -%}
+        <lastmod>{{ h_page.last_modified_at | date_to_xmlschema }}</lastmod>
+      {%- endif -%}
+
+      {%- if h_page.sitemap.changefreq == null -%}
+        <changefreq>weekly</changefreq>
+      {%- else -%}
+        <changefreq>{{ h_page.sitemap.changefreq }}</changefreq>
+      {%- endif -%}
+
+      {%- if h_page.sitemap.priority == null -%}
+          <priority>0.5</priority>
+      {%- else -%}
+        <priority>{{ h_page.sitemap.priority }}</priority>
+      {%- endif -%}
+    </url>
+  {%- endif -%}
+
+{%- endfor -%}
+
+{%- for post in site.posts -%}
+  <url>
+    <loc>{{ site.url }}{{ post.url }}</loc>
+    {%- if post.last_modified_at == null -%}
+      <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+    {%- else -%}
+      <lastmod>{{ post.last_modified_at | date_to_xmlschema }}</lastmod>
+    {%- endif -%}
+
+    {%- if post.sitemap.changefreq == null -%}
+      <changefreq>{{ page.changefreq }}</changefreq>
+    {%- else -%}
+      <changefreq>{{ post.sitemap.changefreq }}</changefreq>
+    {%- endif -%}
+
+    {%- if post.sitemap.priority == null -%}
+        <priority>{{ page.priority }}</priority>
+    {%- else -%}
+      <priority>{{ post.sitemap.priority }}</priority>
+    {%- endif -%}
+  </url>
+{%- endfor -%}
+</urlset>
